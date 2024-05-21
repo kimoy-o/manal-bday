@@ -15,8 +15,9 @@
     </div>
     <div class="overlay"></div>
     <div class="container">
+        <div id="spinner" class="spinner"></div>
         <div class="button-container">
-        <button id="revealBtn">Press me!</button>
+            <button id="revealBtn" class="hidden">Press me!</button>
         </div>
         <div id="wish" class="hidden">
             <h1 class="animated-text">Happy Birthday Manal!</h1>
@@ -35,22 +36,34 @@
         </div>
     </div>
     
-
     <script>
-    document.getElementById("revealBtn").addEventListener("click", function() {
-        document.getElementById("wish").classList.remove("hidden");
-        document.getElementById("wish").classList.add("fade-in");
-        this.classList.add("hidden");
+        const video = document.getElementById('backgroundVideo');
+        const spinner = document.getElementById('spinner');
+        const revealBtn = document.getElementById('revealBtn');
 
-        const cardContainer = document.querySelector('.card-container');
-        cardContainer.classList.add('card-reveal');
+        video.addEventListener('canplaythrough', function() {
+            spinner.classList.add('hidden');
+            revealBtn.classList.remove('hidden');
+        });
 
-        const cardOverlay = document.querySelector('.container');
-        cardOverlay.classList.add('card-overlay')
+        document.getElementById("revealBtn").addEventListener("click", function() {
+            document.getElementById("wish").classList.remove("hidden");
+            document.getElementById("wish").classList.add("fade-in");
+            this.classList.add("hidden");
 
-        const card = document.querySelector('.card');
-        card.classList.add('flipped');
-    });
+            const cardContainer = document.querySelector('.card-container');
+            cardContainer.classList.add('card-reveal');
+
+            const cardOverlay = document.querySelector('.container');
+            cardOverlay.classList.add('card-overlay')
+
+            const card = document.querySelector('.card');
+            card.classList.add('flipped');
+        });
+
+        // Initially hide the button and show the spinner
+        revealBtn.classList.add('hidden');
+        spinner.classList.remove('hidden');
     </script>
 </body>
 </html>
